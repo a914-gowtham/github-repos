@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="11" />
+    <bytecodeTargetLevel target="1.7">
+      <module name="Github_Repos.app" target="11" />
+      <module name="Github_Repos.buildSrc" target="11" />
+      <module name="Github_Repos.components" target="11" />
+      <module name="Github_Repos.core" target="11" />
+      <module name="GithubRepos.buildSrc" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>

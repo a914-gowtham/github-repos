@@ -83,4 +83,7 @@ dependencies {
     kapt(Hilt.compiler)
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
 
+    implementation(project(Modules.core))
+    implementation(project(Modules.components))
+
 }

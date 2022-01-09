@@ -6,7 +6,7 @@ object Config {
     const val applicationId = "com.gowtham.githubrepos"
     const val versionCode = 1
     const val versionName = "1.0"
-
+    const val projectName = "Github Repos"
     const val androidTestInstrumentation = "com.gowtham.githubrepos.HiltTestRunner"
     const val proguardConsumerRules = "consumer-rules.pro"
     const val dimension = "environment"
