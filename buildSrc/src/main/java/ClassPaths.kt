@@ -4,4 +4,7 @@ object ClassPaths {
         "org.jetbrains.kotlin:kotlin-gradle-plugin:${Kotlin.version}"
     const val hiltGradlePlugin =
         "com.google.dagger:hilt-android-gradle-plugin:${Hilt.version}"
+    const val sqlDelightGradlePlugin =
+        "com.squareup.sqldelight:gradle-plugin:${SqlDelight.version}"
+
 }

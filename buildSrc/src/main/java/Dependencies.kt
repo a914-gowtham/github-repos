@@ -20,7 +20,15 @@ object Kotlin {
     const val stbLib = "org.jetbrains.kotlin:kotlin-stdlib:$version"
     const val coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
     const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
-    const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1"
+    const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2"
+}
+
+object Ktor {
+    private const val ktorVersion = "1.5.2"
+    const val core = "io.ktor:ktor-client-core:$ktorVersion"
+    const val clientSerialization = "io.ktor:ktor-client-serialization:$ktorVersion"
+    const val android = "io.ktor:ktor-client-android:$ktorVersion"
+    const val ktorClientMock = "io.ktor:ktor-client-mock:$ktorVersion"
 }
 
 object Android {
@@ -69,6 +77,12 @@ object Accompanist {
     const val pager = "com.google.accompanist:accompanist-pager:$version"
     const val permissions = "com.google.accompanist:accompanist-permissions:$version"
     const val systemUi = "com.google.accompanist:accompanist-systemuicontroller:$version"
+}
+
+object SqlDelight {
+    const val version = "1.5.1"
+    const val runtime = "com.squareup.sqldelight:runtime:${version}"
+    const val androidDriver = "com.squareup.sqldelight:android-driver:${version}"
 }
 
 object Navigation {

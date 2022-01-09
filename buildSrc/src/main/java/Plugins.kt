@@ -4,6 +4,8 @@ object Plugins {
     const val kotlinAndroid = "kotlin-android"
     const val kotlinKapt = "kotlin-kapt"
     const val hilt = "dagger.hilt.android.plugin"
+    const val sqlDeLightPlugin = "com.squareup.sqldelight"
+    const val serialization = "plugin.serialization"
 
     object Spotless {
         const val plugin = "com.diffplug.spotless"

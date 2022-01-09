@@ -17,9 +17,10 @@ buildscript {
     }
     dependencies {
         classpath(ClassPaths.gradlePlugin)
-        classpath(ClassPaths.kotlinGradlePlugin)
+//        classpath(ClassPaths.kotlinGradlePlugin)
         classpath(ClassPaths.hiltGradlePlugin)
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31")
+        classpath(ClassPaths.sqlDelightGradlePlugin)
     }
 }
 

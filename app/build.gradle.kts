@@ -3,6 +3,7 @@ plugins {
     id(Plugins.kotlinAndroid)
     id(Plugins.kotlinKapt)
     id(Plugins.hilt)
+    kotlin(Plugins.serialization) version Kotlin.version
 }
 
 android {
@@ -84,8 +85,12 @@ dependencies {
     kapt(Hilt.compiler)
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
 
+    implementation(SqlDelight.androidDriver)
+    implementation(Kotlin.serialization)
+
     implementation(project(Modules.core))
     implementation(project(Modules.components))
     implementation(project(Modules.trendingRepoUiHome))
+    implementation(project(Modules.trendingRepoDataSource))
 
 }

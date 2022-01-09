@@ -1,11 +1,11 @@
 package com.gowtham.entities
 
 data class Repository(
-    val description: String,
-    val full_name: String,
     val id: Int,
-    val language: String?,
-    val starsCount: Int?,
     val name: String,
-    val owner: Owner,
+    val fullName: String,
+    val description: String,
+    val ownerName: String,
+    val language: String,
+    val starsCount: Int,
 )

@@ -1,0 +1,30 @@
+CREATE TABLE  github_Entity(
+    id INTEGER NOT NULL PRIMARY KEY,
+    name TEXT NOT NULL,
+    fullName TEXT NOT NULL,
+    description TEXT NOT NULL,
+    ownerName TEXT NOT NULL,
+    language TEXT NOT NULL,
+    starsCount INTEGER NOT NULL
+);
+
+selectAll:
+SELECT *
+FROM github_Entity;
+
+insertRepository:
+INSERT OR REPLACE
+INTO github_Entity (
+    id,
+    name,
+    fullName,
+    description,
+    ownerName,
+    language,
+    starsCount
+) VALUES (?, ?, ?, ?, ?, ?, ?);
+
+
+searchRepoByName:
+SELECT * FROM github_Entity
+WHERE name LIKE ('%' || :query || '%');

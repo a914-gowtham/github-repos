@@ -5,7 +5,10 @@
       <module name="Github_Repos.app" target="11" />
       <module name="Github_Repos.buildSrc" target="11" />
       <module name="Github_Repos.components" target="11" />
+      <module name="Github_Repos.constants" target="11" />
       <module name="Github_Repos.core" target="11" />
+      <module name="Github_Repos.trending-repos.datasource" target="11" />
+      <module name="Github_Repos.trending-repos.entities" target="11" />
       <module name="Github_Repos.trending-repos.ui-home" target="11" />
       <module name="GithubRepos.buildSrc" target="11" />
     </bytecodeTargetLevel>
