@@ -8,6 +8,8 @@ object Modules {
     const val trendingRepoUiHome = ":trending-repos:ui-home"
     const val trendingRepoEntities = ":trending-repos:entities"
     const val trendingRepoDataSource = ":trending-repos:datasource"
+    const val trendingRepoUseCases = ":trending-repos:usecases"
+
     const val repoEntity = ":note:note-datasource"
     const val noteRepos = ":note:note-repositories"
     const val noteDataSource = ":note:note-datasource"

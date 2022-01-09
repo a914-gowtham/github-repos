@@ -92,5 +92,6 @@ dependencies {
     implementation(project(Modules.components))
     implementation(project(Modules.trendingRepoUiHome))
     implementation(project(Modules.trendingRepoDataSource))
+    implementation(project(Modules.trendingRepoUseCases))
 
 }

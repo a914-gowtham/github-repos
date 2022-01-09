@@ -1,6 +1,7 @@
 package com.gowtham.githubrepos.di
 
 import android.app.Application
+import com.gowtham.usecases.RepoUseCases
 import com.squareup.sqldelight.android.AndroidSqliteDriver
 import com.squareup.sqldelight.db.SqlDriver
 import dagger.Module
@@ -19,10 +20,21 @@ object RepoUseCasesModule {
     @Named("githubAndroidSqlDriver") // in case you had another SQL Delight db
     fun provideAndroidDriver(app: Application): SqlDriver {
         return AndroidSqliteDriver(
-            schema = HeroInteractors.schema,
+            schema = RepoUseCases.schema,
             context = app,
-            name = HeroInteractors.dbName
+            name = RepoUseCases.dbName
         )
+    }
+
+    /*
+    * Provide all the usecases/interactors in usecases module
+    */
+    @Provides
+    @Singleton
+    fun provideRepoUseCases(
+        @Named("githubAndroidSqlDriver") sqlDriver: SqlDriver,
+    ): RepoUseCases{
+        return RepoUseCases.build(sqlDriver)
     }
 
 }
