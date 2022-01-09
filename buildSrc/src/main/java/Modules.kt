@@ -5,8 +5,10 @@ object Modules {
     const val components = ":components"
     const val constants = ":constants"
     const val trendingRepos = ":trending-repos"
-    const val noteHome = ":trending-repos:ui-home"
+    const val trendingRepoUiHome = ":trending-repos:ui-home"
+    const val trendingRepoEntities = ":trending-repos:entities"
     const val noteDomain = ":note:note-domain"
+    const val repoEntity = ":note:note-datasource"
     const val noteRepos = ":note:note-repositories"
     const val noteDataSource = ":note:note-datasource"
 }

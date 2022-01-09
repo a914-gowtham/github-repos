@@ -14,4 +14,4 @@ include(":components")
 include(":constants")
 include(":trending-repos")
 include(":trending-repos:ui-home")
-
+include(":trending-repos:entities")

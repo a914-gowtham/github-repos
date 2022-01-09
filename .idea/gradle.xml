@@ -17,6 +17,7 @@
             <option value="$PROJECT_DIR$/constants" />
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/trending-repos" />
+            <option value="$PROJECT_DIR$/trending-repos/entities" />
             <option value="$PROJECT_DIR$/trending-repos/ui-home" />
           </set>
         </option>
