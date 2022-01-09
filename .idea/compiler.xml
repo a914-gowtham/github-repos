@@ -6,6 +6,7 @@
       <module name="Github_Repos.buildSrc" target="11" />
       <module name="Github_Repos.components" target="11" />
       <module name="Github_Repos.core" target="11" />
+      <module name="Github_Repos.trending-repos.ui-home" target="11" />
       <module name="GithubRepos.buildSrc" target="11" />
     </bytecodeTargetLevel>
   </component>

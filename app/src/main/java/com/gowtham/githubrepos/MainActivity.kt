@@ -8,9 +8,16 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.gowtham.components.AnnotatedClickableText
+import com.gowtham.githubrepos.navigation.Screens
 import com.gowtham.githubrepos.ui.theme.GithubReposTheme
+import com.gowtham.ui_home.HomeScreen
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,24 +25,34 @@ class MainActivity : ComponentActivity() {
             GithubReposTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    AnnotatedClickableText(title = "Hello", desc = "Desc"){
-
-                    }
+                    AppNavigation()
                 }
             }
         }
     }
+
 }
+
 
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
+fun AppNavigation() {
+    val navController = rememberNavController()
+
+    NavHost(
+        navController = navController,
+        startDestination = Screens.HomeScreen.route
+        ){
+
+        composable(Screens.HomeScreen.route) {
+            HomeScreen()
+        }
+    }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true,showSystemUi = true)
 @Composable
 fun DefaultPreview() {
     GithubReposTheme {
-        Greeting("Android")
+        AppNavigation()
     }
 }

@@ -74,6 +74,7 @@ dependencies {
     implementation(Compose.material)
     implementation(Compose.tooling)
     implementation(Compose.activity)
+    implementation(Navigation.compose)
 
     // lifecycle
     implementation(Lifecycle.runtime)
@@ -85,5 +86,6 @@ dependencies {
 
     implementation(project(Modules.core))
     implementation(project(Modules.components))
+    implementation(project(Modules.noteHome))
 
 }

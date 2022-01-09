@@ -12,3 +12,6 @@ include(":app")
 include(":core")
 include(":components")
 include(":constants")
+include(":trending-repos")
+include(":trending-repos:ui-home")
+
