@@ -7,10 +7,10 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -28,7 +28,8 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun AnnotatedClickableText(
-    title: String, desc: String,
+    title: String,
+    desc: String,
     onBtnClicked: () -> Unit
 ) {
 
@@ -47,19 +48,21 @@ fun AnnotatedClickableText(
             .padding(22.dp)
     ) {
         ClickableText(
-            annotatedString, modifier = Modifier
+            annotatedString,
+            modifier = Modifier
                 .padding(8.dp),
             style = TextStyle(color = MaterialTheme.colors.onSurface),
             onClick = {
                 onBtnClicked()
-            })
+            }
+        )
     }
-
 }
 
 @Composable
 fun DefaultTextField(
-    value: String, hint: String,
+    value: String,
+    hint: String,
     keyboardType: KeyboardType = KeyboardType.Text,
     isPassword: Boolean = false,
     valueListener: (String) -> Unit
@@ -82,7 +85,8 @@ fun DefaultTextField(
 @Composable
 fun DefaultButton(title: String, listener: () -> Unit) {
     Button(
-        modifier = Modifier.fillMaxWidth(), colors = ButtonDefaults
+        modifier = Modifier.fillMaxWidth(),
+        colors = ButtonDefaults
             .buttonColors(contentColor = MaterialTheme.colors.onSurface),
         onClick = listener, shape = RoundedCornerShape(22.dp)
     ) {

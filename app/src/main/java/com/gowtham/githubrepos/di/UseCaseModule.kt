@@ -33,8 +33,7 @@ object RepoUseCasesModule {
     @Singleton
     fun provideRepoUseCases(
         @Named("githubAndroidSqlDriver") sqlDriver: SqlDriver,
-    ): RepoUseCases{
+    ): RepoUseCases {
         return RepoUseCases.build(sqlDriver)
     }
-
 }

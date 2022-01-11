@@ -12,7 +12,4 @@ class TrendingRepoCache {
 
         val dbName: String = "github.db"
     }
-
 }
-
-

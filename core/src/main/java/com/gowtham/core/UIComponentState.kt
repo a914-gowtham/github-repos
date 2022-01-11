@@ -5,7 +5,7 @@ package com.gowtham.core
  */
 sealed class UIComponentState {
 
-    object Show: UIComponentState()
+    object Show : UIComponentState()
 
-    object Hide: UIComponentState()
+    object Hide : UIComponentState()
 }

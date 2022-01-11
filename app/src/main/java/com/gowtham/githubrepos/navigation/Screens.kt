@@ -3,7 +3,7 @@ package com.gowtham.githubrepos.navigation
 sealed class Screens(val route: String) {
     object HomeScreen : Screens("Home")
 
-    //add other screens
+    // add other screens
 
     fun withArgs(vararg args: String): String {
         return buildString {

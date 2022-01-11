@@ -20,5 +20,4 @@ object Utils {
             else -> false
         }
     }
-
 }

@@ -11,5 +11,4 @@ object Config {
     const val proguardConsumerRules = "consumer-rules.pro"
     const val dimension = "environment"
 //    const val buildToolsVersion = "31.0.0"
-
 }

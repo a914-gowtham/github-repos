@@ -27,7 +27,6 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var repoCases: RepoUseCases
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -39,9 +38,7 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-
 }
-
 
 @Composable
 fun AppNavigation(repoCases: RepoUseCases) {
@@ -50,22 +47,24 @@ fun AppNavigation(repoCases: RepoUseCases) {
     NavHost(
         navController = navController,
         startDestination = Screens.HomeScreen.route
-        ){
+    ) {
 
         composable(Screens.HomeScreen.route) {
-            Button(onClick = {
+            Button(
+                onClick = {
 
-                CoroutineScope(Dispatchers.IO).launch {
-                    repoCases.getRepos.execute()
+                    CoroutineScope(Dispatchers.IO).launch {
+                        repoCases.getRepos.execute()
+                    }
                 }
-            }){
+            ) {
                 Text(text = "Hit my ass!")
             }
         }
     }
 }
 
-@Preview(showBackground = true,showSystemUi = true)
+@Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun DefaultPreview() {
    /* GithubReposTheme {

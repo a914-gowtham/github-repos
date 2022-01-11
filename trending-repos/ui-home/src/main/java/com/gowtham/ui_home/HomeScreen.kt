@@ -10,8 +10,6 @@ import com.gowtham.components.AnnotatedClickableText
 fun HomeScreen() {
     Column(modifier = Modifier.fillMaxSize()) {
         AnnotatedClickableText(title = "Hiii", desc = "Secscs") {
-
         }
     }
-
 }

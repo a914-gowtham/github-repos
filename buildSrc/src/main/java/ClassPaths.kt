@@ -6,5 +6,4 @@ object ClassPaths {
         "com.google.dagger:hilt-android-gradle-plugin:${Hilt.version}"
     const val sqlDelightGradlePlugin =
         "com.squareup.sqldelight:gradle-plugin:${SqlDelight.version}"
-
 }

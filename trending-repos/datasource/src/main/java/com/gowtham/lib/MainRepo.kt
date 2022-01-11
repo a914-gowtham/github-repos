@@ -7,7 +7,8 @@ interface MainRepo {
     suspend fun getRepoList(): List<Repository>
 
     suspend fun getStarGazers(
-        ownerName: String, repoName: String,
+        ownerName: String,
+        repoName: String,
     ): Int
 
     suspend fun getLanguages(
@@ -20,5 +21,4 @@ interface MainRepo {
     suspend fun searchByName(query: String): List<Repository>
 
     suspend fun insert(repos: Repository)
-
 }

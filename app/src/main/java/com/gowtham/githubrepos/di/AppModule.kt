@@ -17,7 +17,6 @@ object AppModule {
         return 22
     }
 
-
     @Provides
     @Singleton
     fun provideLogger(): Logger {
@@ -26,5 +25,4 @@ object AppModule {
             isDebug = true
         )
     }
-
 }

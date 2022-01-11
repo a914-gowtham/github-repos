@@ -1,7 +1,3 @@
 package com.gowtham.core
 
-object Utils {
-
-
-
-}
+object Utils

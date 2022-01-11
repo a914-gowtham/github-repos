@@ -10,7 +10,7 @@ data class RepoDto(
     val name: String,
     @SerialName("full_name")
     val fullName: String,
-    val description: String= "No description available",
+    val description: String = "No description available",
     @SerialName("languages_url")
     val languagesUrl: String,
     @SerialName("stargazers_url")
@@ -25,13 +25,13 @@ data class Owner(
 )
 
 fun RepoDto.toRepo(starCount: Int, language: String): Repository {
-   return Repository(
-       id = id,
-       name = name,
-       fullName = fullName,
-       description = description,
-       ownerName = owner.login,
-       language = language,
-       starsCount = starCount
-   )
+    return Repository(
+        id = id,
+        name = name,
+        fullName = fullName,
+        description = description,
+        ownerName = owner.login,
+        language = language,
+        starsCount = starCount
+    )
 }

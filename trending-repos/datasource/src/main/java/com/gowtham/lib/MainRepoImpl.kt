@@ -19,28 +19,28 @@ class MainRepoImpl(val cache: GithubDatabase, val remote: ApiService) : MainRepo
             val response = remote.getRepoList()
             val remoteList = response.body()!!
             println("${remoteList.first()}")
-//            for (repo in remoteList)
-
+            for (repo in remoteList)
+                insert(repo.toRepo(0, ""))
             return emptyList()
         } catch (e: Exception) {
             e.printStackTrace()
 //            throw Exception(e)
         }
-       /* return if (cacheRepoList.isEmpty()) {
-            try {
-                val response = remote.getRepoList()
-                val remoteList = response.body()!!.map {
-                    it.toRepo(getStarGazers(it.owner.login,it.name), "") }
-                for (repo in remoteList)
-                    insert(repo)
-                return remoteList
-            } catch (e: Exception) {
-                e.printStackTrace()
-                throw Exception(e)
-            }
+        /* return if (cacheRepoList.isEmpty()) {
+             try {
+                 val response = remote.getRepoList()
+                 val remoteList = response.body()!!.map {
+                     it.toRepo(getStarGazers(it.owner.login,it.name), "") }
+                 for (repo in remoteList)
+                     insert(repo)
+                 return remoteList
+             } catch (e: Exception) {
+                 e.printStackTrace()
+                 throw Exception(e)
+             }
 
-        } else
-            cacheRepoList*/
+         } else
+             cacheRepoList*/
 
         return emptyList()
     }
@@ -77,6 +77,4 @@ class MainRepoImpl(val cache: GithubDatabase, val remote: ApiService) : MainRepo
             )
         }
     }
-
-
 }
