@@ -1,12 +1,21 @@
 package com.gowtham.lib.remote
 
+import com.gowtham.constants.Constants.BASE_URL
 import com.gowtham.lib.remote.model.RepoDto
+import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import kotlinx.serialization.json.Json
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.http.GET
 import retrofit2.http.Path
+
+private val json = Json {
+    ignoreUnknownKeys = true
+    coerceInputValues = true
+}
 
 interface ApiService {
 
@@ -27,13 +36,17 @@ interface ApiService {
 
     companion object Factory {
         fun build(): ApiService {
+            val contentType = "application/json".toMediaType()
+
             val logging = HttpLoggingInterceptor()
             logging.setLevel(HttpLoggingInterceptor.Level.BODY)
-            val httpClient= OkHttpClient.Builder()
+            val httpClient = OkHttpClient.Builder()
                 .addInterceptor(logging)
                 .build()
-          return Retrofit.Builder()
+            return Retrofit.Builder()
                 .client(httpClient)
+                // kotlin serializer convertor
+                .addConverterFactory(json.asConverterFactory(contentType))
                 .baseUrl(BASE_URL)
                 .build()
                 .create(ApiService::class.java)

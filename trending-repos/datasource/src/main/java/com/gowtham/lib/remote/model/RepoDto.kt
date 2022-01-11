@@ -10,8 +10,7 @@ data class RepoDto(
     val name: String,
     @SerialName("full_name")
     val fullName: String,
-    val description: String,
-    val ownerName: String,
+    val description: String= "No description available",
     @SerialName("languages_url")
     val languagesUrl: String,
     @SerialName("stargazers_url")

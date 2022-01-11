@@ -3,30 +3,38 @@ package com.gowtham.githubrepos
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.ViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.gowtham.components.AnnotatedClickableText
 import com.gowtham.githubrepos.navigation.Screens
 import com.gowtham.githubrepos.ui.theme.GithubReposTheme
-import com.gowtham.ui_home.HomeScreen
+import com.gowtham.usecases.RepoUseCases
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    @Inject
+    lateinit var repoCases: RepoUseCases
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             GithubReposTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    AppNavigation()
+                    AppNavigation(repoCases)
                 }
             }
         }
@@ -36,7 +44,7 @@ class MainActivity : ComponentActivity() {
 
 
 @Composable
-fun AppNavigation() {
+fun AppNavigation(repoCases: RepoUseCases) {
     val navController = rememberNavController()
 
     NavHost(
@@ -45,7 +53,14 @@ fun AppNavigation() {
         ){
 
         composable(Screens.HomeScreen.route) {
-            HomeScreen()
+            Button(onClick = {
+
+                CoroutineScope(Dispatchers.IO).launch {
+                    repoCases.getRepos.execute()
+                }
+            }){
+                Text(text = "Hit my ass!")
+            }
         }
     }
 }
@@ -53,7 +68,7 @@ fun AppNavigation() {
 @Preview(showBackground = true,showSystemUi = true)
 @Composable
 fun DefaultPreview() {
-    GithubReposTheme {
-        AppNavigation()
-    }
+   /* GithubReposTheme {
+        AppNavigation(repoCases)
+    }*/
 }

@@ -6,8 +6,8 @@ import com.gowtham.lib.cache.TrendingRepoCache
 class GetReposUseCase(val mainRepo: MainRepo) {
 
 
-    fun execute(){
-
+    suspend fun execute(){
+       mainRepo.getRepoList()
       }
 
 }
