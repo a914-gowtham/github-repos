@@ -9,6 +9,7 @@ plugins {
 
 dependencies {
     "implementation"(project(Modules.trendingRepoEntities))
+    "implementation"(project(Modules.constants))
     "implementation"(SqlDelight.runtime)
     "implementation"(Kotlin.serialization)
     "implementation"("com.squareup.retrofit2:retrofit:2.9.0")

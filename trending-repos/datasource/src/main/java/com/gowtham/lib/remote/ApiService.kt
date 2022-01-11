@@ -34,7 +34,7 @@ interface ApiService {
                 .build()
           return Retrofit.Builder()
                 .client(httpClient)
-                .baseUrl("")
+                .baseUrl(BASE_URL)
                 .build()
                 .create(ApiService::class.java)
         }
