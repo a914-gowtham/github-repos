@@ -1,6 +1,7 @@
 package com.gowtham.lib.remote
 
 import com.gowtham.constants.Constants.BASE_URL
+import com.gowtham.lib.remote.model.Owner
 import com.gowtham.lib.remote.model.RepoDto
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
@@ -26,7 +27,7 @@ interface ApiService {
     suspend fun getStarGazers(
         @Path("ownerName") ownerName: String,
         @Path("repoName") repoName: String,
-    ): Response<List<Any>>
+    ): Response<List<Owner>>
 
     @GET("repos/{ownerName}/{repoName}/languages")
     suspend fun getLanguages(

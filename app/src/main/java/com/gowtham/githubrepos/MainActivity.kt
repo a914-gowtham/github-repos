@@ -14,6 +14,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.gowtham.githubrepos.navigation.Screens
 import com.gowtham.githubrepos.ui.theme.GithubReposTheme
+import com.gowtham.ui_home.HomeScreen
 import com.gowtham.usecases.RepoUseCases
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -24,16 +25,13 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    @Inject
-    lateinit var repoCases: RepoUseCases
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             GithubReposTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    AppNavigation(repoCases)
+                    AppNavigation()
                 }
             }
         }
@@ -41,7 +39,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun AppNavigation(repoCases: RepoUseCases) {
+fun AppNavigation() {
     val navController = rememberNavController()
 
     NavHost(
@@ -50,16 +48,7 @@ fun AppNavigation(repoCases: RepoUseCases) {
     ) {
 
         composable(Screens.HomeScreen.route) {
-            Button(
-                onClick = {
-
-                    CoroutineScope(Dispatchers.IO).launch {
-                        repoCases.getRepos.execute()
-                    }
-                }
-            ) {
-                Text(text = "Hit my ass!")
-            }
+            HomeScreen()
         }
     }
 }
@@ -67,7 +56,7 @@ fun AppNavigation(repoCases: RepoUseCases) {
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun DefaultPreview() {
-   /* GithubReposTheme {
-        AppNavigation(repoCases)
-    }*/
+    GithubReposTheme {
+        AppNavigation()
+    }
 }
