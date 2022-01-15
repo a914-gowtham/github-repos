@@ -62,7 +62,7 @@ fun RepoRow() {
         ) {
             Image(
                 painter = rememberImagePainter(
-                    data = "https://avatars.githubusercontent.com/u/46242119?v=4",
+                    data = "https://avatars.githubusercontent.com/u/82592?s=200&v=4",
                     imageLoader = LocalImageLoader.current,
                     builder = {
                         crossfade(
@@ -71,21 +71,24 @@ fun RepoRow() {
                     }
                 ),
                 contentDescription = "Image",
-                modifier = Modifier.size(32.dp)
-                    .clip(shape = RectangleShape)
+                modifier = Modifier.size(18.dp).padding(
+                    top = 3.dp
+                )
             )
             Text(
                 text = "square",
                 style = MaterialTheme.typography.body1,
                 color = Color.DarkGray,
-                modifier = Modifier.padding(start = 8.dp)
+                modifier = Modifier.padding(start = 6.dp).wrapContentSize(
+                    align = Alignment.Center
+                )
             )
         }
         Text(
             text = "bionic",
             style = MaterialTheme.typography.h6,
             color = Color.Black,
-            modifier = Modifier.padding(vertical = 4.dp)
+            modifier = Modifier.padding(vertical = 2.dp)
         )
         Text(
             text = "A python framework for data science",
