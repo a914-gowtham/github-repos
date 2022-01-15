@@ -5,8 +5,10 @@ import com.gowtham.lib.remote.model.Owner
 import com.gowtham.lib.remote.model.RepoDto
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
+import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
+import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
 import retrofit2.Retrofit
@@ -43,6 +45,7 @@ interface ApiService {
             logging.setLevel(HttpLoggingInterceptor.Level.BODY)
             val httpClient = OkHttpClient.Builder()
                 .addInterceptor(logging)
+                .addInterceptor(MyInterceptor())
                 .build()
             return Retrofit.Builder()
                 .client(httpClient)
@@ -53,4 +56,16 @@ interface ApiService {
                 .create(ApiService::class.java)
         }
     }
+}
+
+class MyInterceptor : Interceptor{
+    override fun intercept(chain: Interceptor.Chain): okhttp3.Response {
+
+        val request: Request = chain.request()
+            .newBuilder()
+            .addHeader("Authorization", "token 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")
+            .build()
+        return chain.proceed(request)
+    }
+
 }

@@ -16,10 +16,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import coil.compose.LocalImageLoader
 import coil.compose.rememberImagePainter
+import com.gowtham.entities.Repository
 
 
 @Composable
-fun RepoRow() {
+fun RepoRowView(repo: Repository) {
     Column(
         Modifier
             .background(Color.White)
@@ -34,12 +35,13 @@ fun RepoRow() {
         ) {
             Image(
                 painter = rememberImagePainter(
-                    data = "https://avatars.githubusercontent.com/u/82592?s=200&v=4",
+                    data = repo.avatar,
                     imageLoader = LocalImageLoader.current,
                     builder = {
                         crossfade(
                             durationMillis = 400
                         )
+                        placeholder(0)
                     }
                 ),
                 contentDescription = "Image",
@@ -50,7 +52,7 @@ fun RepoRow() {
                     )
             )
             Text(
-                text = "square",
+                text = repo.ownerName,
                 style = MaterialTheme.typography.body1,
                 color = Color.DarkGray,
                 modifier = Modifier
@@ -61,13 +63,13 @@ fun RepoRow() {
             )
         }
         Text(
-            text = "bionic",
+            text = repo.name,
             style = MaterialTheme.typography.h6,
             color = Color.Black,
             modifier = Modifier.padding(vertical = 2.dp)
         )
         Text(
-            text = "A python framework for data science",
+            text = repo.description,
             style = MaterialTheme.typography.subtitle1,
             color = Color.Black,
         )
@@ -81,7 +83,7 @@ fun RepoRow() {
                 tint = Color(0xFFFFDE03)
             )
             Text(
-                text = "Python",
+                text = repo.language,
                 style = MaterialTheme.typography.subtitle1,
                 color = Color.Gray,
                 modifier = Modifier.padding(start = 6.dp)
@@ -93,7 +95,7 @@ fun RepoRow() {
                 tint = Color(0xFFFFDE03)
             )
             Text(
-                text = "44",
+                text = repo.starsCount.toString(),
                 style = MaterialTheme.typography.subtitle1,
                 color = Color.Gray,
                 modifier = Modifier.padding(start = 6.dp)

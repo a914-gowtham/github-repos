@@ -22,6 +22,8 @@ data class RepoDto(
 data class Owner(
     val id: Int,
     val login: String,
+    @SerialName("avatar_url")
+    val avatar: String,
 )
 
 fun RepoDto.toRepo(starCount: Int, language: String): Repository {
@@ -31,6 +33,7 @@ fun RepoDto.toRepo(starCount: Int, language: String): Repository {
         fullName = fullName,
         description = description,
         ownerName = owner.login,
+        avatar = owner.avatar,
         language = language,
         starsCount = starCount
     )

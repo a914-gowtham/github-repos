@@ -8,6 +8,7 @@ plugins {
 
 
 dependencies {
+    "implementation"(project(Modules.core))
     "implementation"(project(Modules.trendingRepoDataSource))
     "implementation"(project(Modules.trendingRepoEntities))
 }

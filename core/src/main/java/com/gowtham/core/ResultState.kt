@@ -5,8 +5,11 @@ package com.gowtham.core
  */
 sealed class ResultState<out T> {
     data class Success<out T>(val data: T) : ResultState<T>()
-    data class Error(val code: Int?, val message: String = "Something went wrong!") :
+    data class Failure(val code: Int?= null, val message: String = "Something went wrong!") :
         ResultState<Nothing>()
 
     object Loading : ResultState<Nothing>()
+
+    object Idle : ResultState<Nothing>()
+
 }

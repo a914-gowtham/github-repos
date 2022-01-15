@@ -4,6 +4,7 @@ CREATE TABLE  github_Entity(
     fullName TEXT NOT NULL,
     description TEXT NOT NULL,
     ownerName TEXT NOT NULL,
+    avatar TEXT NOT NULL,
     language TEXT NOT NULL,
     starsCount INTEGER NOT NULL
 );
@@ -20,9 +21,10 @@ INTO github_Entity (
     fullName,
     description,
     ownerName,
+    avatar,
     language,
     starsCount
-) VALUES (?, ?, ?, ?, ?, ?, ?);
+) VALUES (?, ?, ?, ?,?, ?, ?, ?);
 
 
 searchRepoByName:

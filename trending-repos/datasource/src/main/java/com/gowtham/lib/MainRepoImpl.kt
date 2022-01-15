@@ -9,6 +9,10 @@ import com.gowtham.lib.remote.model.RepoDto
 import com.gowtham.lib.remote.model.toRepo
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.flow
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonArrayBuilder
+import kotlinx.serialization.json.JsonBuilder
+import kotlinx.serialization.json.JsonObject
 import java.util.concurrent.Flow
 import kotlin.system.measureTimeMillis
 
@@ -19,27 +23,31 @@ class MainRepoImpl(val cache: GithubDatabase, val remote: ApiService) : MainRepo
     override suspend fun getRepoList(isRefresh: Boolean): List<Repository> {
         val cacheRepoList = queries.selectAll().executeAsList().map { it.toRepo() }
 
-         return if (cacheRepoList.isEmpty() || isRefresh) {
-             try {
-                 val response = remote.getRepoList()
-                 return fetchStarAndLanguage(response.body()!!)
-             } catch (e: Exception) {
-                 e.printStackTrace()
-                 throw e
-             }
-         } else
-             cacheRepoList
+        return if (cacheRepoList.isEmpty() || isRefresh) {
+            try {
+                val response = remote.getRepoList()
+                if (response.isSuccessful)
+                    return fetchStarAndLanguage(response.body()!!)
+                val errorStr = response.errorBody()?.string()
+                throw Exception(errorStr)
+            } catch (e: Exception) {
+                e.printStackTrace()
+                throw e
+            }
+        } else
+            cacheRepoList
     }
 
 
     private suspend fun fetchStarAndLanguage(list: List<RepoDto>): List<Repository> {
-        val resultList= mutableListOf<Repository>()
+        val resultList = mutableListOf<Repository>()
         val errorHandler = CoroutineExceptionHandler { _, throwable ->
             println("Error thrown somewhere within parent or child: $throwable")
         }
+        val subList= list.subList(0,10)
         val parentJob = CoroutineScope(Dispatchers.IO).launch(errorHandler) {
             supervisorScope {
-                for (repo in list) {
+                for (repo in subList) {
                     launch {
                         val starGazers =
                             getStarGazers(
@@ -114,6 +122,7 @@ class MainRepoImpl(val cache: GithubDatabase, val remote: ApiService) : MainRepo
                 description = description,
                 ownerName = ownerName,
                 language = language,
+                avatar= avatar,
                 starsCount = starsCount.toLong()
             )
         }

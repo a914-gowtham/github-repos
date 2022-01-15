@@ -11,12 +11,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.gowtham.ui_home.HomeViewModel
 
 
 @Composable
-fun ErrorView(errorStr: String = "Something went wrong!") {
+fun ErrorView(errorStr: String = "Something went wrong!", viewModel: HomeViewModel?= null) {
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -32,10 +34,11 @@ fun ErrorView(errorStr: String = "Something went wrong!") {
             fontWeight = FontWeight.Bold,
             fontSize = 22.sp,
             color = Color.Black,
-            modifier = Modifier.padding(bottom = 12.dp)
+            modifier = Modifier.padding(bottom = 12.dp),
+            textAlign = TextAlign.Center
         )
         Button(
-            onClick = { /* ... */ },
+            onClick = { viewModel?.fetchRepoList() },
             elevation = ButtonDefaults.elevation(0.dp, 0.dp),
             contentPadding = PaddingValues(
                 horizontal = 18.dp,

@@ -10,6 +10,7 @@ fun Github_Entity.toRepo(): Repository {
         fullName = fullName,
         description = description,
         ownerName = ownerName,
+        avatar = avatar,
         language = language,
         starsCount = starsCount.toInt()
     )

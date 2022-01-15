@@ -7,6 +7,8 @@ apply {
 dependencies{
     "implementation"(project(Modules.core))
     "implementation"(project(Modules.components))
+    "implementation"(project(Modules.trendingRepoEntities))
+    "implementation"(project(Modules.trendingRepoUseCases))
     "implementation"(Accompanist.coil)
     "implementation"(Accompanist.swipeToRefresh)
 }
