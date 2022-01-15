@@ -15,6 +15,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 
 @Composable
@@ -104,6 +105,7 @@ fun AppBarWithSearchOption(onClickListener: (showSearch: Boolean) -> Unit) {
             text = "Trending Repositories",
             fontWeight = FontWeight.ExtraBold,
             color = Color.Black,
+            fontSize = 19.sp,
             modifier = Modifier.weight(1f, true)
         )
         IconButton(onClick = {
