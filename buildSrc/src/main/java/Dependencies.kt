@@ -77,6 +77,7 @@ object Accompanist {
     const val pager = "com.google.accompanist:accompanist-pager:$version"
     const val permissions = "com.google.accompanist:accompanist-permissions:$version"
     const val systemUi = "com.google.accompanist:accompanist-systemuicontroller:$version"
+    const val swipeToRefresh = "com.google.accompanist:accompanist-swiperefresh:0.22.0-rc"
 }
 
 object SqlDelight {

@@ -16,10 +16,10 @@ class MainRepoImpl(val cache: GithubDatabase, val remote: ApiService) : MainRepo
 
     private val queries: GithubQueries = cache.githubQueries
 
-    override suspend fun getRepoList(): List<Repository> {
+    override suspend fun getRepoList(isRefresh: Boolean): List<Repository> {
         val cacheRepoList = queries.selectAll().executeAsList().map { it.toRepo() }
 
-         return if (cacheRepoList.isEmpty()) {
+         return if (cacheRepoList.isEmpty() || isRefresh) {
              try {
                  val response = remote.getRepoList()
                  return fetchStarAndLanguage(response.body()!!)

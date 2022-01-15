@@ -4,7 +4,7 @@ import com.gowtham.entities.Repository
 
 interface MainRepo {
 
-    suspend fun getRepoList(): List<Repository>
+    suspend fun getRepoList(isRefresh: Boolean): List<Repository>
 
     suspend fun getStarGazers(
         ownerName: String,
