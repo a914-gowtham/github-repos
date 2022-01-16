@@ -37,10 +37,9 @@ class MainRepoImpl(val cache: GithubDatabase, val remote: ApiService) : MainRepo
         val errorHandler = CoroutineExceptionHandler { _, throwable ->
             println("Error thrown somewhere within parent or child: $throwable")
         }
-        val subList = list.subList(0, 50)
         val parentJob = CoroutineScope(Dispatchers.IO).launch(errorHandler) {
             supervisorScope {
-                for (repo in subList) {
+                for (repo in list) {
                     launch {
                         val starGazers =
                             getStarGazers(
@@ -60,12 +59,14 @@ class MainRepoImpl(val cache: GithubDatabase, val remote: ApiService) : MainRepo
             }
         }
         parentJob.join()
-        return resultList
+        return selectAll()
     }
 
     override suspend fun getStarGazers(ownerName: String, repoName: String): Int {
         try {
-            val response = remote.getStarGazers(
+            //retrofit delay workaround
+            val remote2 = ApiService.build()
+            val response = remote2.getStarGazers(
                 ownerName = ownerName,
                 repoName = repoName
             )
@@ -83,7 +84,9 @@ class MainRepoImpl(val cache: GithubDatabase, val remote: ApiService) : MainRepo
         repoName: String
     ): String {
         try {
-            val response = remote.getLanguages(
+            //retrofit delay workaround
+            val remote2 = ApiService.build()
+            val response = remote2.getLanguages(
                 ownerName = ownerName,
                 repoName = repoName
             )
@@ -104,6 +107,10 @@ class MainRepoImpl(val cache: GithubDatabase, val remote: ApiService) : MainRepo
 
     override suspend fun searchByName(query: String): List<Repository> {
         return queries.searchRepoByName(query).executeAsList().map { it.toRepo() }
+    }
+
+    override suspend fun selectRepoByName(name: String): Repository? {
+        return queries.searchRepoByName(name).executeAsOneOrNull()?.toRepo()
     }
 
     override suspend fun insert(repo: Repository) {

@@ -20,5 +20,7 @@ interface MainRepo {
 
     suspend fun searchByName(query: String): List<Repository>
 
+    suspend fun selectRepoByName(name: String):  Repository?
+
     suspend fun insert(repos: Repository)
 }
