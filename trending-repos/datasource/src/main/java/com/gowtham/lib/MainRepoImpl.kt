@@ -14,7 +14,7 @@ class MainRepoImpl(val cache: GithubDatabase, val remote: ApiService) : MainRepo
     private val queries: GithubQueries = cache.githubQueries
 
     override suspend fun getRepoList(isRefresh: Boolean): List<Repository> {
-        val cacheRepoList = queries.selectAll().executeAsList().map { it.toRepo() }
+        val cacheRepoList = selectAll()
 
         return if (cacheRepoList.isEmpty() || isRefresh) {
             try {
@@ -37,7 +37,7 @@ class MainRepoImpl(val cache: GithubDatabase, val remote: ApiService) : MainRepo
         val errorHandler = CoroutineExceptionHandler { _, throwable ->
             println("Error thrown somewhere within parent or child: $throwable")
         }
-        val subList = list.subList(0, 10)
+        val subList = list.subList(0, 50)
         val parentJob = CoroutineScope(Dispatchers.IO).launch(errorHandler) {
             supervisorScope {
                 for (repo in subList) {
@@ -99,7 +99,7 @@ class MainRepoImpl(val cache: GithubDatabase, val remote: ApiService) : MainRepo
     }
 
     override suspend fun selectAll(): List<Repository> {
-        TODO("Not yet implemented")
+        return queries.selectAll().executeAsList().map { it.toRepo() }
     }
 
     override suspend fun searchByName(query: String): List<Repository> {

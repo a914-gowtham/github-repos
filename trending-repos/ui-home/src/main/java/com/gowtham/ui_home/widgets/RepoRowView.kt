@@ -16,11 +16,19 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import coil.compose.LocalImageLoader
 import coil.compose.rememberImagePainter
+import com.gowtham.components.CircleShape
+import com.gowtham.components.Utils.color
+import com.gowtham.core.Utils
 import com.gowtham.entities.Repository
 
 
 @Composable
-fun RepoRowView(repo: Repository) {
+fun RepoRowView(repo: Repository, json: String?) {
+
+    val languageHexColor = Utils.getLanguageHexColor(
+        repo.language,
+        json
+    )
     Column(
         Modifier
             .background(Color.White)
@@ -77,10 +85,8 @@ fun RepoRowView(repo: Repository) {
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.padding(vertical = 8.dp)
         ) {
-            Icon(
-                imageVector = Icons.Default.Star,
-                contentDescription = "Star",
-                tint = Color(0xFFFFDE03)
+            CircleShape(
+                size = 14, color = languageHexColor.color
             )
             Text(
                 text = repo.language,

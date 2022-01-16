@@ -42,7 +42,7 @@ interface ApiService {
             val contentType = "application/json".toMediaType()
 
             val logging = HttpLoggingInterceptor()
-            logging.setLevel(HttpLoggingInterceptor.Level.BODY)
+            logging.setLevel(HttpLoggingInterceptor.Level.BASIC)
             val httpClient = OkHttpClient.Builder()
                 .addInterceptor(logging)
                 .addInterceptor(MyInterceptor())

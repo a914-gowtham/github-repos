@@ -8,14 +8,15 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
+import com.gowtham.components.Utils.loadJSONFromAsset
 import com.gowtham.core.ResultState
 import com.gowtham.ui_home.widgets.*
-
 
 @Composable
 fun HomeScreen(
@@ -26,6 +27,8 @@ fun HomeScreen(
     val isRefreshing by viewModel.refreshState.collectAsState()
     val isSearchView by viewModel.isSearchOpened.collectAsState()
     val searchQuery by viewModel.lastQuery.collectAsState()
+    val context = LocalContext.current
+    val json= loadJSONFromAsset(context, assetPath = "github-colors.json")
 
     Scaffold(
         topBar = {
@@ -68,7 +71,7 @@ fun HomeScreen(
             ) {
                 LazyColumn(contentPadding = it) {
                     items(repoList) { repo ->
-                        RepoRowView(repo)
+                        RepoRowView(repo,json)
                     }
                 }
             }
