@@ -16,26 +16,8 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-
-
-@Composable
-fun Toolbar(
-    isSearch: Boolean,
-    query: String,
-    onClickListener: (showSearch: Boolean) -> Unit,
-    queryChange: (query: String) -> Unit,
-) {
-    TopAppBar(
-        elevation = 4.dp,
-    ) {
-
-        if (isSearch)
-            SearchView(query,onClickListener,queryChange)
-        else
-            AppBarWithSearchOption(onClickListener)
-
-    }
-}
+import com.gowtham.core.ResultState
+import com.gowtham.entities.Repository
 
 
 @Composable
@@ -102,7 +84,11 @@ fun SearchView(
 }
 
 @Composable
-fun AppBarWithSearchOption(onClickListener: (showSearch: Boolean) -> Unit) {
+fun AppBarWithSearchOption(
+    listState: ResultState<List<Repository>>,
+    isRefreshing: Boolean,
+    onClickListener: (showSearch: Boolean) -> Unit,
+) {
     Row(
         modifier = Modifier.padding(start = 12.dp),
         verticalAlignment = Alignment.CenterVertically
@@ -114,7 +100,9 @@ fun AppBarWithSearchOption(onClickListener: (showSearch: Boolean) -> Unit) {
             fontSize = 19.sp,
             modifier = Modifier.weight(1f, true)
         )
+        if(listState is ResultState.Success)
         IconButton(onClick = {
+            if(!isRefreshing)
             onClickListener.invoke(true)
         }) {
             Icon(

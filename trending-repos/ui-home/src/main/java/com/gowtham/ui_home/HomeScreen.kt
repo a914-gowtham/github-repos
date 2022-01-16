@@ -4,18 +4,17 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Scaffold
+import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.gowtham.core.ResultState
-import com.gowtham.ui_home.widgets.ErrorView
-import com.gowtham.ui_home.widgets.LoadingView
-import com.gowtham.ui_home.widgets.RepoRowView
-import com.gowtham.ui_home.widgets.Toolbar
+import com.gowtham.ui_home.widgets.*
 
 
 @Composable
@@ -30,12 +29,22 @@ fun HomeScreen(
 
     Scaffold(
         topBar = {
-            Toolbar(isSearch = isSearchView,
-                query = searchQuery,
-                onClickListener = {
-                viewModel.showSearchView(it)
-            }) {
-                viewModel.queryRepo(it.trim())
+            TopAppBar(
+                elevation = 4.dp,
+            ) {
+                if (isSearchView)
+                    SearchView(searchQuery, onClickListener = {
+                        viewModel.showSearchView(it)
+                    }) {
+                        viewModel.queryRepo(it.trim())
+                    }
+                else
+                    AppBarWithSearchOption(
+                        listState = listState.value,
+                        isRefreshing = isRefreshing
+                    ) {
+                        viewModel.showSearchView(it)
+                    }
             }
         },
         modifier = Modifier.fillMaxSize()
@@ -50,6 +59,7 @@ fun HomeScreen(
             val state = listState.value as ResultState.Success
             val repoList = state.data
             SwipeRefresh(
+                swipeEnabled = !isSearchView,
                 state = rememberSwipeRefreshState(isRefreshing),
                 onRefresh = { viewModel.refreshRepoList() },
                 indicator = { s, trigger ->
