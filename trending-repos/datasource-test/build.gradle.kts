@@ -2,7 +2,13 @@ apply {
     from("$rootDir/library-build.gradle")
 }
 
+plugins {
+    kotlin(Plugins.serialization) version Kotlin.version
+}
+
 dependencies {
+    "testImplementation"(Kotlin.serialization)
+    "testImplementation"(project(Modules.trendingRepoEntities))
     "testImplementation"(project(Modules.trendingRepoDataSource))
     "testImplementation"("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.2")
     "testImplementation"("junit:junit:4.13.2")
