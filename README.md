@@ -1,14 +1,14 @@
 # github-repos
 Multi-module demo app that gets data from a Github api
 
-# List and Refresh
+## List and Refresh
 <img src="https://github.com/a914-gowtham/github-repos/blob/master/art/demo1.gif" width="25%">
 
-# Search and Cache
+## Search and Cache
 <img src="https://github.com/a914-gowtham/github-repos/blob/master/art/demo2.gif" width="25%">
 
 
-# Module Design
+## Module Design
 
 | Module name        | Type                 | Description                                                      |
 | -------------      | -------------        | -------------                                                    |
@@ -22,12 +22,12 @@ Multi-module demo app that gets data from a Github api
 | [constants](/constants/)          | Java/Kotlin Library  | Random constants.                                                |
 | [components](/components/)         | Android Library      | Common Composables and Android utils                   |
 
-# Architecture
-<img src="/art/arch.png" width="75%" height="75%" />
+## Architecture
+<img src="/art/arch.png" width="40%" height="40%" />
 
 
 
-# build.gradle files
+## build.gradle files
 There are 3 types of build.gradle files.
 1. android application (app module)
 1. android-library-build.gradle
@@ -36,5 +36,5 @@ There are 3 types of build.gradle files.
     - Pure java/kotlin library.
 
 
-# API
+## API
 https://docs.github.com/en/rest/reference/repos#list-public-repositories
