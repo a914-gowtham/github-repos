@@ -37,9 +37,10 @@ class MainRepoImpl(val cache: GithubDatabase, val remote: ApiService) : MainRepo
         val errorHandler = CoroutineExceptionHandler { _, throwable ->
             println("Error thrown somewhere within parent or child: $throwable")
         }
+        val subList= list.subList(0,10)
         val parentJob = CoroutineScope(Dispatchers.IO).launch(errorHandler) {
             supervisorScope {
-                for (repo in list) {
+                for (repo in subList) {
                     launch {
                         val starGazers =
                             getStarGazers(
@@ -59,7 +60,7 @@ class MainRepoImpl(val cache: GithubDatabase, val remote: ApiService) : MainRepo
             }
         }
         parentJob.join()
-        return selectAll()
+        return resultList
     }
 
     override suspend fun getStarGazers(ownerName: String, repoName: String): Int {
