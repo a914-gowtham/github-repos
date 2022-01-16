@@ -59,7 +59,7 @@ class MainRepoImpl(val cache: GithubDatabase, val remote: ApiService) : MainRepo
             }
         }
         parentJob.join()
-        return selectAll()
+        return resultList
     }
 
     override suspend fun getStarGazers(ownerName: String, repoName: String): Int {
