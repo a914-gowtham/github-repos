@@ -29,6 +29,7 @@ Multi-module demo app that gets data from a Github api
 ## Libraries and Decisions Overview
 - [Kotlin](https://kotlinlang.org/) - First class and official programming language for Android development.
 - [Coroutines & Flow](https://kotlinlang.org/docs/reference/coroutines-overview.html) - For asynchronous and more..
+- [Jetpack Compose](https://developer.android.com/jetpack/compose) - Modern toolkit for building native UI. It simplifies and accelerates UI development on Android.
 - [SQLDelight](https://github.com/cashapp/sqldelight) - Generates typesafe Kotlin APIs from SQL and it supports a variety of dialects and platforms
 - [Android Architecture Components](https://developer.android.com/topic/libraries/architecture) - Collection of libraries that help you design quality, robust, testable, and maintainable apps.
   - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - Stores UI-related data that isn't destroyed on UI changes. 
