@@ -26,6 +26,16 @@ class HomeViewModel @Inject constructor(
     val refreshState: StateFlow<Boolean>
         get() = _refreshState
 
+    private val _isSearchOpened =
+        MutableStateFlow(false)
+    val isSearchOpened: StateFlow<Boolean>
+        get() = _isSearchOpened
+
+    private val _lastQuery =
+        MutableStateFlow("")
+    val lastQuery: StateFlow<String>
+        get() = _lastQuery
+
     init {
         fetchRepoList()
     }
@@ -50,9 +60,21 @@ class HomeViewModel @Inject constructor(
     }
 
     fun queryRepo(query: String) {
-        viewModelScope.launch {
-            _trendingRepoList.value = useCases.searchRepoUseCase.execute(query)
+        _lastQuery.value= query
+        if (query.isEmpty()) {
+            _trendingRepoList.value = ResultState.Success(emptyList())
+        }else {
+            viewModelScope.launch {
+                _trendingRepoList.value = useCases.searchRepoUseCase.execute(query)
+            }
         }
     }
 
+    fun showSearchView(show: Boolean){
+        _isSearchOpened.value= show
+        if(show)
+            queryRepo("")
+        else
+          fetchRepoList()
+    }
 }

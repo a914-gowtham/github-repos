@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Scaffold
-import androidx.compose.material.contentColorFor
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -24,14 +23,19 @@ fun HomeScreen(
     viewModel: HomeViewModel,
 ) {
 
-    var isSearchView: Boolean by remember { mutableStateOf(false) }
     val listState = viewModel.listState.collectAsState()
     val isRefreshing by viewModel.refreshState.collectAsState()
+    val isSearchView by viewModel.isSearchOpened.collectAsState()
+    val searchQuery by viewModel.lastQuery.collectAsState()
 
     Scaffold(
         topBar = {
-            Toolbar(isSearch = isSearchView) {
-                isSearchView = it
+            Toolbar(isSearch = isSearchView,
+                query = searchQuery,
+                onClickListener = {
+                viewModel.showSearchView(it)
+            }) {
+                viewModel.queryRepo(it.trim())
             }
         },
         modifier = Modifier.fillMaxSize()

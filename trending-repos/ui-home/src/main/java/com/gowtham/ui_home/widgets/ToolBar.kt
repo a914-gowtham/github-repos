@@ -21,14 +21,16 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun Toolbar(
     isSearch: Boolean,
-    onClickListener: (showSearch: Boolean) -> Unit
+    query: String,
+    onClickListener: (showSearch: Boolean) -> Unit,
+    queryChange: (query: String) -> Unit,
 ) {
     TopAppBar(
         elevation = 4.dp,
     ) {
 
         if (isSearch)
-            SearchView(onClickListener)
+            SearchView(query,onClickListener,queryChange)
         else
             AppBarWithSearchOption(onClickListener)
 
@@ -37,9 +39,11 @@ fun Toolbar(
 
 
 @Composable
-fun SearchView(onClickListener: (showSearch: Boolean) -> Unit) {
-
-    var searchQuery: String by remember { mutableStateOf("") }
+fun SearchView(
+    query: String,
+    onClickListener: (showSearch: Boolean) -> Unit,
+    queryChange: (query: String) -> Unit
+) {
 
     Row(
         verticalAlignment = Alignment.CenterVertically
@@ -57,13 +61,15 @@ fun SearchView(onClickListener: (showSearch: Boolean) -> Unit) {
         ) {
 
             TextField(
-                value = searchQuery,
+                value = query,
                 onValueChange = {
-                    searchQuery = it
+                    queryChange(it)
                 },
                 singleLine = true,
                 trailingIcon = {
-                    IconButton(onClick = { searchQuery = "" }) {
+                    IconButton(onClick = {
+                        queryChange("")
+                    }) {
                         Icon(
                             imageVector = Icons.Sharp.Close,
                             contentDescription = "Close",
@@ -82,7 +88,7 @@ fun SearchView(onClickListener: (showSearch: Boolean) -> Unit) {
                 ),
                 modifier = Modifier.fillMaxWidth()
             )
-            if (searchQuery.isEmpty())
+            if (query.isEmpty())
                 Text(
                     "Search Repository",
                     color = Color.Black.copy(alpha = 0.4f), modifier = Modifier

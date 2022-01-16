@@ -8,13 +8,6 @@ import com.gowtham.lib.remote.ApiService
 import com.gowtham.lib.remote.model.RepoDto
 import com.gowtham.lib.remote.model.toRepo
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.flow
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonArrayBuilder
-import kotlinx.serialization.json.JsonBuilder
-import kotlinx.serialization.json.JsonObject
-import java.util.concurrent.Flow
-import kotlin.system.measureTimeMillis
 
 class MainRepoImpl(val cache: GithubDatabase, val remote: ApiService) : MainRepo {
 
@@ -44,7 +37,7 @@ class MainRepoImpl(val cache: GithubDatabase, val remote: ApiService) : MainRepo
         val errorHandler = CoroutineExceptionHandler { _, throwable ->
             println("Error thrown somewhere within parent or child: $throwable")
         }
-        val subList= list.subList(0,10)
+        val subList = list.subList(0, 10)
         val parentJob = CoroutineScope(Dispatchers.IO).launch(errorHandler) {
             supervisorScope {
                 for (repo in subList) {
@@ -110,7 +103,7 @@ class MainRepoImpl(val cache: GithubDatabase, val remote: ApiService) : MainRepo
     }
 
     override suspend fun searchByName(query: String): List<Repository> {
-        TODO("Not yet implemented")
+        return queries.searchRepoByName(query).executeAsList().map { it.toRepo() }
     }
 
     override suspend fun insert(repo: Repository) {
@@ -122,7 +115,7 @@ class MainRepoImpl(val cache: GithubDatabase, val remote: ApiService) : MainRepo
                 description = description,
                 ownerName = ownerName,
                 language = language,
-                avatar= avatar,
+                avatar = avatar,
                 starsCount = starsCount.toLong()
             )
         }
